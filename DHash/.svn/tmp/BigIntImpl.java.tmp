@@ -1,0 +1,142 @@
+package DHash;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public class BigIntImpl implements BigInt , Comparable{
+
+    private byte[] number;
+
+    public BigIntImpl(byte[] number) {
+        this.number = number;
+    }
+
+    public BigInt addition(byte[] secNumber) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public BigInt addition(int num) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public BigInt powerOfTwo( int k ) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toString() {
+        String string = "";
+
+        for ( byte b : number )
+            string += Byte.toString(b);
+
+        return string;
+    }
+
+    public String toHexString() {
+        String hexString = "";
+
+        for ( byte b : number )
+           hexString += Integer.toHexString(b & 0xff).toUpperCase();
+            // System.out.printf("%02X " , b & 0xff);
+         
+        return hexString;
+    }
+
+    // Gaspar's Patent
+    public String toBinaryString() {
+        String string = "";
+        int value = toDecimal();
+        int temp;
+        int halfValue;
+        int pos , rem , len;
+        
+        while ( (halfValue = value >> 1) != 0 ) {
+            temp = value;
+            string += (temp & 1);
+            value = halfValue;
+        }
+        pos = string.indexOf("1");
+        rem = string.length() % 8 - 1;
+        len = string.length();
+
+        if (len > 8) {
+            if (pos > rem) {
+                string = string.substring(pos);
+            }
+        }
+        for ( int i = 0; i < string.length() % 8; i++ )
+            string = "0" + string;
+
+        return string;
+    }
+
+    public int toDecimal() {
+        return Integer.parseInt(toHexString(), 16);
+    }
+
+    public int compareTo(Object o) {
+        BigInt bigInt;
+        byte[] bArray;
+        int i;
+        int lenLoc = this.number.length;
+        int lenObj;
+        String strObj;
+        String strLoc;
+
+        if (o instanceof BigInt) {
+            bigInt = (BigInt) o;
+            bArray = bigInt.getBytes();
+            lenObj = bArray.length;
+
+            /* Appropriate for arrays with same length */
+            if ( lenLoc == lenObj) {
+                for ( i = 0; i < lenLoc; i++) {
+                    if ( this.number[i] > bArray[i] )
+                        return 1;
+                    else if ( this.number[i] < bArray[i] )
+                        return -1;
+                    else
+                        continue;
+                }
+            }
+            else { /* for general use*/
+                strObj = bigInt.toBinaryString();
+                lenObj = strObj.length();
+                strLoc = toBinaryString();
+                lenLoc = strLoc.length();
+                
+                if ( lenLoc < lenObj ){
+                    for ( i = lenLoc; i < lenObj; i++) {
+                        if (strObj.charAt(i) == '1') 
+                            return -1;
+                    }
+                }
+                else if ( lenLoc > lenObj) {
+                    for ( i = lenObj; i < lenLoc; i++) {
+                        if (strLoc.charAt(i) == '1') 
+                            return 1;
+                    }
+                }
+                else {
+                     return strLoc.compareTo(strObj);
+                }
+            }
+        }
+        else
+            throw new IllegalArgumentException("Requires a BigInt Object");
+        return 0;
+    }
+
+    public byte[] getBytes() {
+        byte[] nBigNum = new byte[this.number.length];
+
+        System.arraycopy(this.number, 0, nBigNum, 0, this.number.length);
+        
+        return nBigNum;
+    }
+
+    
+
+}

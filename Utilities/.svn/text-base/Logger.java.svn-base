@@ -1,0 +1,56 @@
+package Utilities;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ *
+ * @author John Gasparis
+ * @version 0.0.0.1
+ */
+public final class Logger
+{
+
+    private String message;
+    private int type;
+    private static BlockingQueue<Logger> logQueue = new LinkedBlockingQueue<Logger>();
+
+    public Logger(String message, int type)
+    {
+        this.message = message;
+        this.type = type;
+    }
+
+    public static void addMessage(String message, int type)
+    {
+        try
+        {
+            Logger.logQueue.put(new Logger(message, type));
+        } catch (InterruptedException ex)
+        {
+        }
+    }
+
+    public static Logger getLogger()
+    {
+        try
+        {
+            return Logger.logQueue.take();
+        } catch (InterruptedException ex)
+        {
+
+            return null;
+        }
+    }
+
+    public String getMessage()
+    {
+        return this.message;
+    }
+
+    public int getType()
+    {
+        return this.type;
+    }
+}
+

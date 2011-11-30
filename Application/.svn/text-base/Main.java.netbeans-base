@@ -1,0 +1,143 @@
+package Application;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author gasparosoft
+ */
+import DHash.*;
+import Utilities.Logger;
+import Utilities.MainFrame;
+public class Main extends Thread {
+
+    String mes;
+
+    public Main(String mes) {
+        this.mes = mes;
+    }
+
+    public static void main(String[] args) {
+        Main t1, t2;
+        //t1 = new Main("aek ole");
+        // t2 = new Main("21");
+        //  t1.start();
+        //  t2.start();
+        System.out.println("Exit");
+        byte[] b = new byte[4];
+        b[0] = 15;
+        b[1] = 14;
+        b[2] = 13;
+        b[3] = 12;
+        BigIntImpl impl = new BigIntImpl(b);
+        System.out.println(impl.toBinaryString());
+        int hex;
+        String hexString, string;
+
+        //hex = impl.toHex();
+        hexString = impl.toHexString();
+        string = impl.toString();
+
+        //System.out.println("Hex = " + hex);
+        System.out.println("HexString = " + hexString);
+        System.out.println("String = " + Integer.parseInt(string));
+        System.out.println(impl.toDecimal());
+
+        int k = 1 >> 2;
+        int l = 98327347 & 1;
+
+        System.out.println(l);
+
+        byte[] by = new byte[2];
+        by[0] = 100;
+        by[1] = 102;
+        BigIntImpl bg = new BigIntImpl(by);
+        System.out.println(bg.toDecimal());
+        System.out.println(bg.toBinaryString());
+        if (impl.compareTo(bg) > 0) {
+            System.out.println("greater");
+        }
+
+        if ("010".compareTo("110") < 0) {
+            System.out.println("b");
+        }
+
+        by = new byte[4];
+        by[0] = 10;
+        by[1] = 15;
+        by[2] = 14;
+        by[3] = 16;
+        BigInt bigint = new BigIntImpl(by);
+
+        byte[] byt = bigint.getBytes();
+
+        byt[1] = 30;
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(by[i] + "\t" + byt[i]);
+        }
+        System.out.println();
+
+        Logger.addMessage("AEK1", 0);
+        Logger.addMessage("AEK2", 1);
+        Logger.addMessage("AEK3", 2);
+        Logger.addMessage("AEK1", 0);
+        Logger log;
+      /*  for (int i = 0; i < 4; i++) {
+            log = Logger.getLogger();
+            System.out.println(log.getType() + " " + log.getMessage());
+        }*/
+
+        // bigint.addition(25702);
+        byte[] bb1 = new byte[4];
+        bb1[0] = 1;
+        bb1[1] = 0;
+        bb1[2] = 2;
+        bb1[3] = 4;
+        BigInt bin1 = new BigIntImpl(bb1);
+        //bb1[0] = 10;
+
+        byte[] bb2 = new byte[4];
+        bb2[0] = 1;
+        bb2[1] = 0;
+        bb2[2] = 2;
+        bb2[3] = 4;
+        BigInt bin2 = new BigIntImpl(bb2);
+        System.out.println("******************");
+        System.out.println("bin1 = " + bin1.toBinaryString() + "\t" + bin1.toDecimal() + "\t" + Integer.toBinaryString(bin1.toDecimal()));
+        System.out.println("bin2 = " + bin2.toBinaryString() + "\t" + bin2.toDecimal());
+        BigInt bin3 = bin1.addition(bb2);
+        System.out.println("bin3 = "+bin3.toBinaryString() + "\t" + bin3.toDecimal());
+        System.out.println("******************");
+        //System.out.println(bb2[0]);
+
+
+        byte[] byt1 = new byte[2];
+        byt1[0] = 0;
+        byt1[1] = 20;
+        bin2 = new BigIntImpl(byt1);
+        System.out.println(bin2.toBinaryString());
+        System.out.println("Decimal " + bin2.toDecimal());
+
+        bin3.powerOfTwo(160);
+         System.out.println(Logger.getLogger().getMessage());
+        MainFrame fr = new MainFrame();
+         System.out.println(Logger.getLogger().getMessage());
+        fr.setVisible(true);
+    }
+
+    @Override
+    public void run() {
+        try {
+            Main.sleep(mes.length() * 1000);
+        } catch (InterruptedException ex) {
+        }
+        BigInt bi1 = Hashing.hash(mes.getBytes());
+
+        bi1.toHexString();
+
+    }
+}

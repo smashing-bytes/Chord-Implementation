@@ -1,0 +1,25 @@
+package DHash;
+
+/**
+ *
+ * @author John Gasparis
+ *  @version 0.0.0.1 Testing
+ */
+public interface BigInt {
+
+    public BigInt addition ( byte[] secNumber );
+
+    public BigInt powerOfTwo ( int k );
+    
+    public String toHexString();
+
+    @Override
+    public String toString();
+
+    public String toBinaryString();
+
+    public int toDecimal();
+
+    public byte[] getBytes();
+}
+

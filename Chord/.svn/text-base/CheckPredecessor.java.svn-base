@@ -1,0 +1,13 @@
+package Chord;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public class CheckPredecessor implements Runnable{
+
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+}

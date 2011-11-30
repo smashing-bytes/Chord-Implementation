@@ -1,0 +1,9 @@
+package Utilities;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public class Console {
+   // System.setProperties(null);
+}

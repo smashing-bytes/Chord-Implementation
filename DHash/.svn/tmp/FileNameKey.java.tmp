@@ -1,0 +1,30 @@
+package DHash;
+
+import java.io.Serializable;
+
+/**
+ *
+ * @author John Gasparis
+ *  @version 0.0.0.1
+ */
+public class FileNameKey extends Key implements Serializable{
+
+    private final String fileName;
+    
+    private final BigInt hashKey;
+
+    public FileNameKey(BigInt key , String fileName) {
+        this.hashKey = key;
+        this.fileName = fileName;
+    }
+
+    @Override
+    public byte[] getByteKey() {
+        return hashKey.getBytes();
+    }
+
+   
+    public String getFileName() {
+        return fileName;
+    }
+}

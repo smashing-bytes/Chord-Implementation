@@ -1,0 +1,9 @@
+package Application;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public class NodeImpl implements Node {
+    
+}

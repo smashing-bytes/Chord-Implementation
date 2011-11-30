@@ -1,0 +1,37 @@
+package DHash;
+
+import java.io.Serializable;
+
+/**
+ *
+ * @author gasparosoft
+ * @version 0.0.0.1
+ */
+public class IdKey extends Key implements Serializable{
+
+    private final BigInt hashKey;
+
+    private final int pid;
+
+    private final String ip;
+
+    public IdKey(int pid , String ip , BigInt hashKey) {
+        this.pid = pid;
+        this.ip = ip;
+        this.hashKey = hashKey;
+    }
+
+    public int getPID() {
+        return pid;
+    }
+
+    public String getIP() {
+        return ip;
+    }
+
+    @Override
+    public byte[] getByteKey() {
+        return hashKey.getBytes();
+    }
+
+}

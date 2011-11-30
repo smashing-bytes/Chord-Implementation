@@ -1,0 +1,25 @@
+package Utilities;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public class GuiImpl extends JPanel implements ActionListener {
+
+    public GuiImpl() {
+        
+    }
+    
+     private static void createAndShowGUI() {
+         
+     }
+    
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+}

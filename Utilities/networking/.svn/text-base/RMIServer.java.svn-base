@@ -1,0 +1,70 @@
+package Utilities.networking;
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author haris
+ */
+import java.lang.Thread;
+import java.net.DatagramPacket;
+import java.net.MulticastSocket;
+import java.io.IOException;
+import java.net.InetAddress;
+
+
+
+public class RMIServer implements Runnable
+{
+    boolean listen;
+
+
+    public void run()
+    {
+        /**/
+        try
+        {
+            MulticastSocket socket = new MulticastSocket(4446);
+            InetAddress group = InetAddress.getByName("230.0.0.1");
+            //String response = "Server Responding";
+            byte[] buf = new byte[32];
+           // buf = response.getBytes();
+            
+
+            DatagramPacket packet_out = new DatagramPacket(buf, buf.length, group, 4446);
+
+            System.out.println("RMI Server has started.");
+            while(!Thread.interrupted())
+            {
+               
+                   
+             
+                socket.send(packet_out);
+                Thread.sleep(1500);
+                
+                /*Probably false implementation, TBRL
+                if(received.equals(recCode))
+                {
+                    System.out.print("Sending reply at ");
+                    System.out.println(System.currentTimeMillis());
+                   // socket.send(packet_out);
+                }
+                */
+            }
+            //socket.leaveGroup(group);
+
+           // socket.close();
+        }
+        catch(Exception ioe)
+        {
+
+        }
+
+      
+
+    }
+
+}

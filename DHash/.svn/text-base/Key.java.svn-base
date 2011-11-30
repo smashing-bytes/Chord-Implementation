@@ -1,0 +1,14 @@
+package DHash;
+
+/**
+ * @author John Gasparis
+ * @version 0.0.0.1
+ */
+public abstract class Key
+{
+
+    /**
+     * @return byte representation of a hashed key
+     */
+    public abstract byte[] getByteKey();
+}

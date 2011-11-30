@@ -1,0 +1,21 @@
+package Chord;
+
+/**
+ *
+ * @author John Gasparis
+ * @version 0.0.0.1
+ */
+public interface Chord {
+
+    public void create(); // correct
+
+    public void notifyNode(); // needs parameters
+
+    public void join(); // needs parameters
+
+    // public void find_successor(); // needs parameters
+
+    // private void redistribute_keys();
+    
+    // public void exit();
+}

@@ -1,0 +1,10 @@
+package Application;
+
+/**
+ *
+ * @author gasparosoft
+ */
+public interface Node {
+
+       
+}
