@@ -16,113 +16,113 @@ import java.util.Map.Entry;
  */
 public class Share
 {
-    /*Make the files under the directory available for sharing*/
+	/*Make the files under the directory available for sharing*/
 
-    protected TreeMap<String, String> filenames;
-    private int numberOfFiles;
+	protected TreeMap<String, String> filenames;
+	private int numberOfFiles;
 
-    public Share(String dir)
-    {
-        filenames = new TreeMap<String, String>();
-        visitAllFiles(new File(dir));
-        numberOfFiles = filenames.size();
-    }
+	public Share(String dir)
+	{
+		filenames = new TreeMap<String, String>();
+		visitAllFiles(new File(dir));
+		numberOfFiles = filenames.size();
+	}
 
-    /*To be removed. Testing purposes*/
-    public void print()
-    {
-        Iterator it = filenames.entrySet().iterator();
-        while (it.hasNext())
-        {
-            Entry relation = (Entry) it.next();
+	/*To be removed. Testing purposes*/
+	public void print()
+	{
+		Iterator it = filenames.entrySet().iterator();
+		while (it.hasNext())
+		{
+			Entry relation = (Entry) it.next();
 
-            System.out.println(relation.getKey() + " | " + relation.getValue());
-        }
+			System.out.println(relation.getKey() + " | " + relation.getValue());
+		}
 
 
-    }
+	}
 
-    public String[] getFilenames()
-    {
-        Iterator it = filenames.entrySet().iterator();
-        String fileArray[] = new String[filenames.size()];
+	public String[] getFilenames()
+	{
+		Iterator it = filenames.entrySet().iterator();
+		String fileArray[] = new String[filenames.size()];
 
-        int i = 0;
-        
-        while (it.hasNext())
-        {
-            Entry relation = (Entry) it.next();
+		int i = 0;
 
-            fileArray[i] = relation.getKey().toString();
-            i++;
-        }
+		while (it.hasNext())
+		{
+			Entry relation = (Entry) it.next();
 
-        return fileArray;
+			fileArray[i] = relation.getKey().toString();
+			i++;
+		}
 
-    }
+		return fileArray;
 
-    private void visitAllFiles(File dir)
-    {
+	}
 
-        /*Filter all filenames, blocking hidden files*/
-        FilenameFilter filter = new FilenameFilter()
-        {
+	private void visitAllFiles(File dir)
+	{
 
-            public boolean accept(File dir, String name)
-            {
-                return !name.startsWith(".");
-            }
-        };
+		/*Filter all filenames, blocking hidden files*/
+		FilenameFilter filter = new FilenameFilter()
+		{
 
-        File[] files = dir.listFiles(filter);
+			public boolean accept(File dir, String name)
+			{
+				return !name.startsWith(".");
+			}
+		};
 
-        if (files == null)
-        {
-            return;
-        }
+		File[] files = dir.listFiles(filter);
 
-        for (int i = 0; i < files.length; i++)
-        {
-            if (files[i].isDirectory())
-            {
-                visitAllFiles(new File(files[i].getAbsoluteFile().toString()));
-            }
-            else
-            {
-                addFile(files[i].getName(), files[i].getAbsolutePath().toString());
-            }
-        }
-    }
+		if (files == null)
+		{
+			return;
+		}
 
-    /**
-     * Add the specified file to the share collection
-     * @param Filename
-     * @return false if file already exists.
-     */
-    public void addFile(String filename, String path)
-    {
-        filenames.put(filename, path);
-        this.numberOfFiles++;
-    }
+		for (int i = 0; i < files.length; i++)
+		{
+			if (files[i].isDirectory())
+			{
+				visitAllFiles(new File(files[i].getAbsoluteFile().toString()));
+			}
+			else
+			{
+				addFile(files[i].getName(), files[i].getAbsolutePath().toString());
+			}
+		}
+	}
 
-    /**
-     * Removes the specified file to the share collection
-     * @param Filename
-     * @return false if file does not exist.
-     */
-    public void removeFile(String filename)
-    {
-        filenames.remove(filename);
-        this.numberOfFiles--;
-    }
+	/**
+	 * Add the specified file to the share collection
+	 * @param Filename
+	 * @return false if file already exists.
+	 */
+	public void addFile(String filename, String path)
+	{
+		filenames.put(filename, path);
+		this.numberOfFiles++;
+	}
 
-    public int getNumberOfFiles()
-    {
-        return numberOfFiles;
-    }
+	/**
+	 * Removes the specified file to the share collection
+	 * @param Filename
+	 * @return false if file does not exist.
+	 */
+	public void removeFile(String filename)
+	{
+		filenames.remove(filename);
+		this.numberOfFiles--;
+	}
 
-    public void setNumberOfFiles(int numberOfFiles)
-    {
-        this.numberOfFiles = numberOfFiles;
-    }
+	public int getNumberOfFiles()
+	{
+		return numberOfFiles;
+	}
+
+	public void setNumberOfFiles(int numberOfFiles)
+	{
+		this.numberOfFiles = numberOfFiles;
+	}
 }
